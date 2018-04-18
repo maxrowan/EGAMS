@@ -1,4 +1,4 @@
-let signup = document.querySelector( '.signup');
+let signup = document.querySelector( '.signup' );
 
 signup.addEventListener( 'submit', ( event ) => {
 	event.preventDefault();
@@ -8,7 +8,7 @@ signup.addEventListener( 'submit', ( event ) => {
 	let lastName = signup.querySelector( '.last_name' ).value;
 	let address = signup.querySelector( '.address' ).value;
 	post( '/signup', { email, password, firstName, lastName, address } );
-});
+} );
 
 function post( path, data ) {
 	return window.fetch( path, {
@@ -18,6 +18,6 @@ function post( path, data ) {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify( data )
-	});
+	} );
 }
 

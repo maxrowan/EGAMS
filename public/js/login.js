@@ -21,3 +21,17 @@ function post( path, data ) {
 	} );
 }
 
+let signupBtn = document.getElementById( 'btn_signup' );
+signupBtn.addEventListener( 'click', () => {
+	get( '/signup' );
+});
+
+function get( path ) {
+	return window.fetch( path, {
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		}
+	} );
+}
