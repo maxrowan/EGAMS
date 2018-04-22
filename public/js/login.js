@@ -19,7 +19,10 @@ $( function () {
 
 		$.post( url + endpoint, payload, 'text' )
 			.then( ( { status } ) => {
-				(status === 200 ? alert( 'login success' ) : alert( 'login failed' )); // TODO: remove & link to homepage
+				(status === 200 ?
+					alert( 'login success' )
+					/* $( location ).attr( 'href', 'homepage' ); */ :
+					alert( 'login failed' )); // TODO: link to homepage
 			} );
 	} );
 } );

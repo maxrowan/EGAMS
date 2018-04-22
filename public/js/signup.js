@@ -29,7 +29,11 @@ $( function () {
 
 		$.post( url + endpoint, payload, 'text' )
 			.then( ( { status } ) => {
-				(status === 200 ? alert( 'signup success' ) : alert( 'signup failed' )); // TODO: remove & link to homepage
+				(status === 200 ?
+					alert( 'signup success' )
+					/* $( location ).attr( 'href', 'homepage' ); */ :
+					alert( 'signup failed' )); // TODO: link to homepage (if successful)
+
 			} );
 	} );
 } );

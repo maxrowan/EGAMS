@@ -6,6 +6,7 @@ let logger = require( 'morgan' );
 
 
 let authRouter = require( './routes/auth' );
+let homepageRouter = require( './routes/site' );
 
 let app = express();
 
@@ -20,6 +21,7 @@ app.use( cookieParser() );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 app.use( '/', authRouter );
+app.use( '/site', homepageRouter );
 
 // catch 404 and forward to error handler
 app.use( function ( req, res, next ) {
