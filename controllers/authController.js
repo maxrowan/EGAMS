@@ -23,7 +23,9 @@ ex.auth_login_post = ( req, res ) => {
 			password: req.body.password
 		} )
 		.then( ( { success } ) => {
-			(success ? res.sendStatus( 200 ) : res.sendStatus( 401 ));
+			success ?
+				res.sendStatus( 200 ) :
+				res.sendStatus( 401 );
 		} );
 };
 
@@ -39,9 +41,11 @@ ex.auth_signup_post = ( req, res ) => {
 	store.signup( {
 			email: req.body.email,
 			password: req.body.password,
-			first_name: req.body.firstName,
-			last_name: req.body.lastName,
+			first_name: req.body.first_name,
+			last_name: req.body.last_name,
 			address: req.body.address
 		} )
-		.then( () => res.sendStatus( 200 ) );
+		.then( () =>
+			res.sendStatus( 200 )
+		);
 };

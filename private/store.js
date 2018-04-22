@@ -17,7 +17,8 @@ function signup( { email, password, first_name, last_name, address } ) {
 }
 
 function authenticate( { email, password } ) {
-	console.log( `Authenticating User:\n\tEmail: ${email}\n` );
+	// TODO: Validate input
+	console.log( `Authenticating User:\n\tEmail: ${email}\n\tPassword: ${password}` );
 	return knex( 'users' ).where( { email } )
 		.then( ( [ users ] ) => {
 			if ( !users ) return { success: false };

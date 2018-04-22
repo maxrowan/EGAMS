@@ -1,23 +1,36 @@
-let signup = document.querySelector( '.signup' );
+$( function () {
 
-signup.addEventListener( 'submit', ( event ) => {
-	event.preventDefault();
-	let email = signup.querySelector( '.email' ).value;
-	let password = signup.querySelector( '.password' ).value;
-	let firstName = signup.querySelector( '.first_name' ).value;
-	let lastName = signup.querySelector( '.last_name' ).value;
-	let address = signup.querySelector( '.address' ).value;
-	post( '/signup', { email, password, firstName, lastName, address } );
-} );
+	let url = 'http://localhost:3000';
 
-function post( path, data ) {
-	return window.fetch( path, {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify( data )
+	/**
+	 * Register
+	 */
+	$( '#btn_submit' ).click( ( event ) => {
+		event.preventDefault();
+
+		let endpoint = '/signup';
+
+		let fName = $( '#first_name' ).val();
+		let lName = $( '#last_name' ).val();
+		let email = $( '#email' ).val();
+		let password = $( '#password' ).val();
+		let address = $( '#address' ).val();
+
+
+		let payload = {
+			'email': email,
+			'password': password,
+			'first_name': fName,
+			'last_name': lName,
+			'address': address
+		};
+
+		console.log( payload );	// TODO: remove
+
+		$.post( url + endpoint, payload, 'text' )
+			.then( ( { status } ) => {
+				(status === 200 ? alert( 'signup success' ) : alert( 'signup failed' )); // TODO: remove & link to homepage
+			} );
 	} );
-}
+} );
 

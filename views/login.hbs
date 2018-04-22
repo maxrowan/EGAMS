@@ -1,11 +1,36 @@
-<form class="login">
-	<h1>{{title}}</h1>
-	<input type="text" class="email" placeholder="Email:">
-	<input type="password" class="password" placeholder="Password:">
-	<input type="submit" value="Submit">
-</form>
+<div class="row h-100 justify-content-center align-items-center">
+<div class="card">
+<div class="card-body">
 
-<div>
-	<span>Not a Member?</span>
-	<button id="btn_signup">Sign Up</button>
+	<p class="h4 text-center mb-4">Sign In</p>
+
+	<!-- Email -->
+	<div class="md-form">
+		<i class="fa fa-envelope prefix grey-text"></i>
+		<input id="email" type="email" class="form-control">
+		<label for="email">Email</label>
+	</div>
+
+	<!-- Password -->
+	<div class="md-form">
+		<i class="fa fa-lock prefix grey-text"></i>
+		<input id="password" type="password" class="form-control">
+		<label for="password">Password</label>
+	</div>
+
+	<!-- Sign In Button -->
+	<div class="text-center mt-4">
+		<button id="btn_signin" class="btn btn-default btn-block">Sign in</button>
+	</div>
+
+	<!-- Sign Up Link -->
+	<p class="font-small grey-text d-flex justify-content-center">Don't have an account?
+		<a href="signup" class="dark-grey-text font-weight-bold ml-1"> Sign up</a>
+	</p>
+
 </div>
+</div>
+</div>
+
+
+

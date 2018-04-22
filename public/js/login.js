@@ -1,37 +1,25 @@
-let login = document.querySelector( '.login' );
+$( function () {
 
-login.addEventListener( 'submit', ( event ) => {
-	event.preventDefault();
-	let email = login.querySelector( '.email' ).value;
-	let password = login.querySelector( '.password' ).value;
-	post( '/login', { email, password } )
-		.then( ( { status } ) => {
-			(status === 200 ? alert( 'login success' ) : alert( 'login failed' ));
-		} );
+	let url = 'http://localhost:3000';
+
+	/**
+	 * Submit email and password
+	 */
+	$( '#btn_signin' ).click( ( event ) => {
+		event.preventDefault();
+
+		let endpoint = '/login';
+
+		let email = $( '#email' ).val();
+		let password = $( '#password' ).val();
+
+		let payload = { 'email': email, 'password': password };
+
+		console.log( payload );	// TODO: remove
+
+		$.post( url + endpoint, payload, 'text' )
+			.then( ( { status } ) => {
+				(status === 200 ? alert( 'login success' ) : alert( 'login failed' )); // TODO: remove & link to homepage
+			} );
+	} );
 } );
-
-function post( path, data ) {
-	return window.fetch( path, {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify( data )
-	} );
-}
-
-let signupBtn = document.getElementById( 'btn_signup' );
-signupBtn.addEventListener( 'click', () => {
-	get( '/signup' );
-});
-
-function get( path ) {
-	return window.fetch( path, {
-		method: 'GET',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		}
-	} );
-}

@@ -1,9 +1,58 @@
-<form class="signup">
-	<h1>{{title}}</h1>
-	<input type="text" class="email" placeholder="Email:">
-	<input type="password" class="password" placeholder="Password:">
-	<input type="text" class="first_name" placeholder="First Name:">
-	<input type="text" class="last_name" placeholder="Last Name:">
-	<input type="text" class="address" placeholder="Address:">
-	<input type="submit" value="Submit">
-</form>
+<div class="row h-100 justify-content-center align-items-center">
+<div class="card">
+<div class="card-body">
+
+	<p class="h4 text-center mb-4">Sign Up</p>
+
+	<!-- First Name -->
+	<div class="md-form">
+		<i class="fa fa-user prefix grey-text"></i>
+		<input type="text" id="first_name" class="form-control">
+		<label for="first_name">First Name</label>
+	</div>
+
+	<!-- Last Name -->
+	<div class="md-form">
+		<i class="fa fa-user prefix grey-text"></i>
+		<input type="text" id="last_name" class="form-control">
+		<label for="last_name">Last Name</label>
+	</div>
+
+	<!-- Email -->
+	<div class="md-form">
+		<i class="fa fa-envelope prefix grey-text"></i>
+		<input type="email" id="email" class="form-control">
+		<label for="email">Email</label>
+	</div>
+
+	<!-- Address -->
+	<div class="md-form">
+		<i class="fa fa-home prefix grey-text"></i>
+		<input type="text" id="address" class="form-control">
+		<label for="address">Address</label>
+	</div>
+
+	<!-- Password -->
+	<div class="md-form">
+		<i class="fa fa-lock prefix grey-text"></i>
+		<input type="password" id="password" class="form-control">
+		<label for="password">Password</label>
+	</div>
+
+	<!-- TODO: Confirm Password -->
+	<!--
+	<div class="md-form">
+		<i class="fa fa-exclamation-triangle prefix grey-text"></i>
+		<input type="email" id="confirm_password" class="form-control">
+		<label for="confirm_password">Confirm Password</label>
+	</div>
+	-->
+
+	<!-- Register Button -->
+	<div class="text-center mt-4">
+		<button id="btn_submit" class="btn btn-primary">Register</button>
+	</div>
+
+</div>
+</div>
+</div>

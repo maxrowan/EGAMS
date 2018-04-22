@@ -1,7 +1,8 @@
 let express = require( 'express' );
 let authController = require( '../controllers/authController' );
-
 let router = express.Router();
+let cors = require( 'cors' );
+router.use( cors() );
 
 /**
  * login endpoints
