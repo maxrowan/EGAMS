@@ -1,0 +1,35 @@
+<div class="container h-100">
+	<div class="row h-100 justify-content-center align-items-center">
+		<div class="col-lg-6">
+
+			<form [formGroup]="Send us feedback">
+
+				<!-- Email -->
+				<div class="md-form">
+					<i class="fa fa-envelope prefix grey-text"></i>
+					<input type="email" id="form_email" class="form-control">
+					<label for="form_email">Your email</label>
+				</div>
+
+				<!-- Subject -->
+				<div class="md-form">
+					<i class="fa fa-tag prefix grey-text"></i>
+					<input type="text" id="form_subject" class="form-control">
+					<label for="form_subject">Subject</label>
+				</div>
+
+				<!-- Message -->
+				<div class="md-form">
+					<i class="fa fa-pencil prefix grey-text"></i>
+					<textarea type="text" id="form_message" class="form-control md-textarea" rows="3"></textarea>
+					<label for="form_message">Your message</label>
+				</div>
+
+				<div class="text-center mt-4">
+					<button id="btn_send" class="btn btn-outline-primary" type="submit">Send<i class="fa fa-paper-plane-o ml-2"></i></button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>

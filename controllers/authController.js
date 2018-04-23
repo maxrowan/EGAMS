@@ -22,6 +22,23 @@ ex.auth_login_post = ( req, res ) => {
 			email: req.body.email,
 			password: req.body.password
 		} )
+		.then( ( data ) => {
+			if ( data.success ) {
+				res.send( data );
+			} else {
+				res.sendStatus( 401 );
+			}
+		} );
+};
+
+/**
+ * validate info
+ */
+ex.auth_validate_post = ( req, res ) => {
+	store.authenticate( {
+			email: req.body.email,
+			password: req.body.password
+		} )
 		.then( ( { success } ) => {
 			success ?
 				res.sendStatus( 200 ) :
@@ -43,9 +60,11 @@ ex.auth_signup_post = ( req, res ) => {
 			password: req.body.password,
 			first_name: req.body.first_name,
 			last_name: req.body.last_name,
-			address: req.body.address
+			address: req.body.address,
+			pickup_time: req.body.pickup_time
 		} )
-		.then( () =>
-			res.sendStatus( 200 )
-		);
+		.then( () => {
+			console.log( 'success' );
+			res.sendStatus( 200 );
+		} );
 };

@@ -16,6 +16,8 @@ $( function () {
 		let password = $( '#password' ).val();
 		let address = $( '#address' ).val();
 
+		console.log( )
+
 
 		let payload = {
 			'email': email,
@@ -29,7 +31,9 @@ $( function () {
 
 		$.post( url + endpoint, payload, 'text' )
 			.then( ( { status } ) => {
-				(status === 200 ?
+				let data = JSON.stringify( status );
+				console.log( data );
+				(data === 200 ?
 					alert( 'signup success' )
 					/* $( location ).attr( 'href', 'homepage' ); */ :
 					alert( 'signup failed' )); // TODO: link to homepage (if successful)

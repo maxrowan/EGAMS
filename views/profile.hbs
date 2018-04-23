@@ -1,0 +1,59 @@
+<div class="container h-100">
+	<div class="row h-100 justify-content-center align-items-center">
+		<div class="col-lg-6">
+
+			<!-- Edit Button -->
+			<p class="h5 text-center mb-4">Profile Info
+				<button id="btn_edit" class="btn btn-info waves-light" data-toggle="modal" data-target="#validateModal"
+				        mdbWavesEffect>Edit
+				</button>
+			</p>
+
+			<form [formGroup]="Profile">
+
+				<!-- First Name -->
+				<div class="md-form">
+					<i class="fa fa-user prefix grey-text"></i>
+					<input type="text" formControlName="formFirstName" id="form_first_name" class="form-control"
+					       disabled>
+					<label for="form_first_name-name">First Name</label>
+				</div>
+
+				<!-- Last Name -->
+				<div class="md-form">
+					<i class="fa fa-user prefix grey-text"></i>
+					<input type="text" formControlName="formLastName" id="form_last_name" class="form-control" disabled>
+					<label for="form_last_name">Last Name</label>
+				</div>
+
+				<!-- Email -->
+				<div class="md-form">
+					<i class="fa fa-envelope prefix grey-text"></i>
+					<input type="text" formControlName="formEmail" id="form_email" class="form-control" disabled>
+					<label for="form_email">Email</label>
+				</div>
+
+				<!-- Address -->
+				<div class="md-form">
+					<i class="fa fa-home prefix grey-text"></i>
+					<input type="text" formControlName="formAddress" id="form_address" class="form-control" disabled>
+					<label for="form_address">Address</label>
+				</div>
+
+
+				<p class="h5 text-center mb-4">
+					<!-- Cancel Button -->
+					<button id="btn_cancel" class="btn btn-warning waves-light" mdbWavesEffect hidden>Cancel</button>
+
+					<!-- Save Button -->
+					<button id="btn_save" type="submit" class="btn btn-success waves-light" mdbwavesEffect hidden>
+						Save
+					</button>
+				</p>
+
+			</form>
+
+			{{> validateModal}}
+		</div>
+	</div>
+</div>

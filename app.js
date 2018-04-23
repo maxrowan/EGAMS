@@ -4,11 +4,17 @@ let path = require( 'path' );
 let cookieParser = require( 'cookie-parser' );
 let logger = require( 'morgan' );
 
+let fs = require( 'fs' );
+let hbs = require( 'hbs' );
 
 let authRouter = require( './routes/auth' );
 let homepageRouter = require( './routes/site' );
 
 let app = express();
+
+// register partials with handlebars
+hbs.registerPartial( 'validateModal', fs.readFileSync( __dirname + '/views/partials/validateModal.hbs', 'utf8' ));
+hbs.registerPartials(__dirname + '/views/partials' );
 
 // view engine setup
 app.set( 'views', path.join( __dirname, 'views' ) );

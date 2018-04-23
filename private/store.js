@@ -26,7 +26,21 @@ function authenticate( { email, password } ) {
 				password,
 				salt: users.salt
 			} );
-			return { success: hash === users.hashed_password }
+
+			let success = (hash === users.hashed_password);
+
+			if ( success ) {
+				return {
+					success: true,
+					first_name: users.first_name,
+					last_name: users.last_name,
+					email: users.email,
+					address: users.address,
+					pickup_time: users.pickup_time
+				};
+			} else {
+				return { success: false };
+			}
 		} );
 }
 

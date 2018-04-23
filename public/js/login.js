@@ -1,13 +1,9 @@
-$( function () {
 
-	let url = 'http://localhost:3000';
-
-	/**
-	 * Submit email and password
-	 */
+$( () => {
 	$( '#btn_signin' ).click( ( event ) => {
 		event.preventDefault();
 
+		let url = 'http://localhost:3000';
 		let endpoint = '/login';
 
 		let email = $( '#email' ).val();
@@ -15,14 +11,25 @@ $( function () {
 
 		let payload = { 'email': email, 'password': password };
 
-		console.log( payload );	// TODO: remove
+		$.post( url + endpoint, payload, 'json' )
+			.then( ( data ) => {
 
-		$.post( url + endpoint, payload, 'text' )
-			.then( ( { status } ) => {
-				(status === 200 ?
-					alert( 'login success' )
-					/* $( location ).attr( 'href', 'homepage' ); */ :
-					alert( 'login failed' )); // TODO: link to homepage
+				console.log( data );	// TODO: remove
+
+				let user = {
+					first_name: data.first_name,
+					last_name: data.last_name,
+					email: data.email,
+					address: data.address,
+					pickup_time: data.pickup_time
+				};
+
+				if ( data.success ) {
+					setUserData( user );
+					$( location ).attr( 'href', 'site' );
+				} else {
+					alert( 'Username or password is incorrect' );
+				}
 			} );
 	} );
 } );

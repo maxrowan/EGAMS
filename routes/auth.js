@@ -4,15 +4,11 @@ let router = express.Router();
 let cors = require( 'cors' );
 router.use( cors() );
 
-/**
- * login endpoints
- */
 router.get( '/', authController.auth_login_get );
 router.post( '/login', authController.auth_login_post );
 
-/**
- * signup endpoints
- */
+router.post( '/validate', authController.auth_validate_post );
+
 router.get( '/signup', authController.auth_signup_get );
 router.post( '/signup', authController.auth_signup_post );
 
