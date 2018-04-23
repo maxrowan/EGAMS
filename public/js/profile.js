@@ -1,10 +1,5 @@
 $( () => {
-	let user = getUserData();
-
-	$( '#form_first_name' ).val( user.first_name );
-	$( '#form_last_name' ).val( user.last_name );
-	$( '#form_email' ).val( user.email );
-	$( '#form_address' ).val( user.address );
+	setFormFields();
 
 	$('#modal_btn_submit').click( ( event ) => {
 		event.preventDefault();
@@ -36,7 +31,30 @@ $( () => {
 		$('#btn_save' ).attr( 'hidden' );
 	});
 
-	$( '#btn_submit').click( () => {
-		// TODO: submit changes to DB
+	$( '#btn_save').click( () => {
+
+		let firstName = $( '#form_first_name' ).val();
+		let lastName = $( '#form_last_name' ).val();
+		let email = $( '#form_email' ).val();
+		let address = $( '#form_address' ).val();
+
+		let url = 'http://localhost:3000';
+		let endpoint = '/update';
+
+		let payload = { 'first_name': firstName, 'last_name': lastName, 'email': email, 'address': address };
+		$.post( url + endpoint, payload, 'json' );
+
+		setUserData( payload );
+
+		setFormFields()
 	});
 });
+
+function setFormFields() {
+	let user = getUserData();
+
+	$( '#form_first_name' ).val( user.first_name );
+	$( '#form_last_name' ).val( user.last_name );
+	$( '#form_email' ).val( user.email );
+	$( '#form_address' ).val( user.address );
+}

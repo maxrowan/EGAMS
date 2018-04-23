@@ -9,6 +9,8 @@ router.post( '/login', authController.auth_login_post );
 
 router.post( '/validate', authController.auth_validate_post );
 
+router.post( '/update', authController.post_user_info_update );
+
 router.get( '/signup', authController.auth_signup_get );
 router.post( '/signup', authController.auth_signup_post );
 

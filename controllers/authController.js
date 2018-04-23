@@ -64,7 +64,21 @@ ex.auth_signup_post = ( req, res ) => {
 			pickup_time: req.body.pickup_time
 		} )
 		.then( () => {
-			console.log( 'success' );
 			res.sendStatus( 200 );
+		} );
+};
+
+/**
+ * update user info
+ */
+ex.post_user_info_update = ( req, res ) => {
+	store.updateUserInfo( {
+			first_name: req.body.first_name,
+			last_name: req.body.last_name,
+			email: req.body.email,
+			address: req.body.address
+		} )
+		.then( () => {
+			res.sendStatus( 200 )
 		} );
 };

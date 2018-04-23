@@ -4,6 +4,8 @@ const crypto = require( 'crypto' );
 const knex = require( 'knex' )( require( './knexfile' ) );
 
 function signup( { email, password, first_name, last_name, address } ) {
+	// TODO: make sure user doesn't already exist (email)
+
 	let { salt, hash } = saltHashPassword( { password } );
 	console.log( `Add User with:\n\temail: ${email}\n\tpassword: ${hash}\n\tfirst name: ${first_name}\n\tlast name: ${last_name}\n\taddress: ${address}` );
 	return knex( 'users' ).insert( {
@@ -16,8 +18,19 @@ function signup( { email, password, first_name, last_name, address } ) {
 	} );
 }
 
+function updateUserInfo( { email, first_name, last_name, address } ) {
+	return knex( 'users' )
+		.where( { email: email } )
+		.update( {
+			first_name: first_name,
+			last_name: last_name,
+			email: email,
+			address: address,
+		} );
+}
+
 function authenticate( { email, password } ) {
-	// TODO: Validate input
+	// TODO: Validate input?
 	console.log( `Authenticating User:\n\tEmail: ${email}\n\tPassword: ${password}` );
 	return knex( 'users' ).where( { email } )
 		.then( ( [ users ] ) => {
@@ -59,4 +72,5 @@ function randomString() {
 
 ex.signup = signup;
 ex.authenticate = authenticate;
+ex.updateUserInfo = updateUserInfo;
 ex.saltHashPassword = saltHashPassword;

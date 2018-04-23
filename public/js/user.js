@@ -1,9 +1,18 @@
 function setUserData( user ) {
-	$.cookie( 'first_name', user.first_name );
-	$.cookie( 'last_name', user.last_name );
-	$.cookie( 'email', user.email );
-	$.cookie( 'address', user.address );
-	$.cookie( 'pickup_time', user.pickup_time );
+	if ( user.first_name )
+		$.cookie( 'first_name', user.first_name );
+
+	if ( user.last_name )
+		$.cookie( 'last_name', user.last_name );
+
+	if ( user.email )
+		$.cookie( 'email', user.email );
+
+	if ( user.address )
+		$.cookie( 'address', user.address );
+
+	if ( user.pickup_time )
+		$.cookie( 'pickup_time', user.pickup_time );
 }
 
 function getUserData() {
