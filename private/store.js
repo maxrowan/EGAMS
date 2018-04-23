@@ -4,18 +4,29 @@ const crypto = require( 'crypto' );
 const knex = require( 'knex' )( require( './knexfile' ) );
 
 function signup( { email, password, first_name, last_name, address } ) {
-	// TODO: make sure user doesn't already exist (email)
 
-	let { salt, hash } = saltHashPassword( { password } );
-	console.log( `Add User with:\n\temail: ${email}\n\tpassword: ${hash}\n\tfirst name: ${first_name}\n\tlast name: ${last_name}\n\taddress: ${address}` );
-	return knex( 'users' ).insert( {
-		email,
-		salt,
-		hashed_password: hash,
-		first_name,
-		last_name,
-		address
-	} );
+	// make sure user with this email isn't in the db already
+	return knex( 'users' ).where( { email: email } )
+		.then( ( users ) => {
+			if ( users.length > 0 ) {
+				return false;
+			}
+
+			// add to DB
+			let { salt, hash } = saltHashPassword( { password } );
+			console.log( `Add User with:\n\temail: ${email}\n\tpassword: ${hash}\n\tfirst name: ${first_name}\n\tlast name: ${last_name}\n\taddress: ${address}` );
+			return knex( 'users' ).insert( {
+					email: email,
+					salt: salt,
+					hashed_password: hash,
+					first_name: first_name,
+					last_name: last_name,
+					address: address
+				} )
+				.then( () => {
+					return true;
+				} );
+		} );
 }
 
 function updateUserInfo( { email, first_name, last_name, address } ) {
@@ -70,7 +81,28 @@ function randomString() {
 	return crypto.randomBytes( 4 ).toString( 'hex' );
 }
 
+function getPayments( { email } ) {
+
+	return knex( 'users' ).where( { email: email } )
+		.then( ( users ) => {
+			let user_id = users.id;
+
+			return knex( 'payments' ).where( { user_id: user_id } );
+		} );
+}
+
+function submitFeedback( { email, subject, message } ) {
+	console.log( `Add Feedback with:\n\temail: ${email}\n\tSubject: ${subject}\n\tMessage: ${message}` );
+	return knex( 'feedback' ).insert( {
+		email: email,
+		subject: subject,
+		message: message
+	} );
+}
+
 ex.signup = signup;
 ex.authenticate = authenticate;
 ex.updateUserInfo = updateUserInfo;
 ex.saltHashPassword = saltHashPassword;
+ex.getPayments = getPayments;
+ex.submitFeedback = submitFeedback;
