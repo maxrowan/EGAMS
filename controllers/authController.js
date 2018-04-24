@@ -63,8 +63,10 @@ ex.auth_signup_post = ( req, res ) => {
 			address: req.body.address,
 			pickup_time: req.body.pickup_time
 		} )
-		.then( () => {
-			res.sendStatus( 200 );
+		.then( ( valid ) => {
+			valid ?
+				res.sendStatus( 200 ) :
+				res.sendStatus( 401 );
 		} );
 };
 

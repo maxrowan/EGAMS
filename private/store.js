@@ -84,10 +84,15 @@ function randomString() {
 function getPayments( { email } ) {
 
 	return knex( 'users' ).where( { email: email } )
-		.then( ( users ) => {
-			let user_id = users.id;
+		.then( ( [ user ] ) => {
+			let user_id = user.id;
 
-			return knex( 'payments' ).where( { user_id: user_id } );
+			return knex( 'payments' )
+				.select( 'payment_for', 'amount_due' )
+				.where( { user_id: user_id } )
+				.then( ( payments ) => {
+					return payments;
+				});
 		} );
 }
 

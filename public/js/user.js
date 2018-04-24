@@ -1,18 +1,19 @@
 function setUserData( user ) {
-	if ( user.first_name )
-		$.cookie( 'first_name', user.first_name );
 
-	if ( user.last_name )
-		$.cookie( 'last_name', user.last_name );
+	$.cookie( 'first_name', null );
+	$.cookie( 'first_name', user.first_name );
 
-	if ( user.email )
-		$.cookie( 'email', user.email );
+	$.cookie( 'last_name', null );
+	$.cookie( 'last_name', user.last_name );
 
-	if ( user.address )
-		$.cookie( 'address', user.address );
+	$.cookie( 'email', null );
+	$.cookie( 'email', user.email );
 
-	if ( user.pickup_time )
-		$.cookie( 'pickup_time', user.pickup_time );
+	$.cookie( 'address', null );
+	$.cookie( 'address', user.address );
+
+	$.cookie( 'pickup_time', null );
+	$.cookie( 'pickup_time', user.pickup_time );
 }
 
 function getUserData() {

@@ -31,8 +31,8 @@ ex.post_payments = ( req, res ) => {
 	store.getPayments( {
 			email: req.body.email
 		} )
-		.then( () => {
-			res.sendStatus( 200 );
+		.then( ( payments ) => {
+			res.send( payments );
 		} );
 };
 

@@ -3,7 +3,10 @@ body {
     width: 100vw;
 }
 
-
 .homepage-card > .text-center {
     height: 100%;
+}
+
+.payment-item > .btn {
+    float: right;
 }

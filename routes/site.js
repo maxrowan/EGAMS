@@ -18,6 +18,7 @@ router.get( '/profile', siteController.get_profile );
  * payments
  */
 router.get( '/payments', siteController.get_payments );
+router.post( '/payments', siteController.post_payments );
 
 /**
  * pickup
