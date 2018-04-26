@@ -1,6 +1,6 @@
 $( function () {
 
-	let url = 'http://localhost:3000';
+	let url = 'https://localhost:3000';
 
 	/**
 	 * Register
@@ -16,9 +16,6 @@ $( function () {
 		let password = $( '#password' ).val();
 		let address = $( '#address' ).val();
 
-		console.log( )
-
-
 		let payload = {
 			'email': email,
 			'password': password,
@@ -27,17 +24,13 @@ $( function () {
 			'address': address
 		};
 
-		console.log( payload );	// TODO: remove
-
 		$.post( url + endpoint, payload, 'text' )
-			.then( ( { status } ) => {
-				let data = JSON.stringify( status );
-				console.log( data );
-				(data === 200 ?
-					alert( 'signup success' )
-					/* $( location ).attr( 'href', 'homepage' ); */ :
-					alert( 'signup failed' )); // TODO: link to homepage (if successful)
-
+			.then( ( valid ) => {
+				if ( valid  ){
+					$( location ).attr( 'href', 'site' );
+				} else {
+					alert( 'signup failed' );
+				}
 			} );
 	} );
 } );

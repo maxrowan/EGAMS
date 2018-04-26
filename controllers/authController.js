@@ -15,7 +15,7 @@ let store = require( '../private/store' );
 ex.auth_login_get = ( req, res ) => {
 	let styles = [ { style: '/stylesheets/style.css' } ];
 	let scripts = [ { script: '/js/login.js' } ];
-	res.render( 'login', { title: 'Log In', scripts: scripts, styles: styles } );
+	res.render( 'user/login', { title: 'Log In', scripts: scripts, styles: styles } );
 };
 ex.auth_login_post = ( req, res ) => {
 	store.authenticate( {
@@ -26,7 +26,7 @@ ex.auth_login_post = ( req, res ) => {
 			if ( data.success ) {
 				res.send( data );
 			} else {
-				res.sendStatus( 401 );
+				res.send( false );
 			}
 		} );
 };
@@ -40,9 +40,11 @@ ex.auth_validate_post = ( req, res ) => {
 			password: req.body.password
 		} )
 		.then( ( { success } ) => {
-			success ?
-				res.sendStatus( 200 ) :
+			if ( success ) {
+				res.sendStatus( 200 );
+			} else {
 				res.sendStatus( 401 );
+			}
 		} );
 };
 
@@ -52,7 +54,7 @@ ex.auth_validate_post = ( req, res ) => {
 ex.auth_signup_get = ( req, res ) => {
 	let styles = [ { style: '/stylesheets/style.css' } ];
 	let scripts = [ { script: '/js/signup.js' } ];
-	res.render( 'signup', { title: 'Sign Up', scripts: scripts, styles: styles } );
+	res.render( 'user/signup', { title: 'Sign Up', scripts: scripts, styles: styles } );
 };
 ex.auth_signup_post = ( req, res ) => {
 	store.signup( {
@@ -64,9 +66,11 @@ ex.auth_signup_post = ( req, res ) => {
 			pickup_time: req.body.pickup_time
 		} )
 		.then( ( valid ) => {
-			valid ?
-				res.sendStatus( 200 ) :
-				res.sendStatus( 401 );
+			if ( valid ) {
+				res.send( true );
+			} else {
+				res.send( false );
+			}
 		} );
 };
 
@@ -81,6 +85,6 @@ ex.post_user_info_update = ( req, res ) => {
 			address: req.body.address
 		} )
 		.then( () => {
-			res.sendStatus( 200 )
+			res.sendStatus( 200 );
 		} );
 };

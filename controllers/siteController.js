@@ -7,7 +7,7 @@ let store = require( '../private/store' );
 ex.get_homepage = ( req, res ) => {
 	let styles = [ { style: '/stylesheets/style.css' } ];
 	let scripts = [ { script: '/js/homepage.js' } ];
-	res.render( 'homepage', { title: 'Home', scripts: scripts, styles: styles } );
+	res.render( 'user/homepage', { title: 'Home', scripts: scripts, styles: styles } );
 };
 
 /**
@@ -16,7 +16,7 @@ ex.get_homepage = ( req, res ) => {
 ex.get_profile = ( req, res ) => {
 	let styles = [ { style: '/stylesheets/style.css' } ];
 	let scripts = [ { script: '/js/profile.js' } ];
-	res.render( 'profile', { title: 'Home', scripts: scripts, styles: styles } );
+	res.render( 'user/profile', { title: 'Profile', scripts: scripts, styles: styles } );
 };
 
 /**
@@ -25,15 +25,25 @@ ex.get_profile = ( req, res ) => {
 ex.get_payments = ( req, res ) => {
 	let styles = [ { style: '/stylesheets/style.css' } ];
 	let scripts = [ { script: '/js/payments.js' } ];
-	res.render( 'payments', { title: 'Home', scripts: scripts, styles: styles } );
+	res.render( 'user/payments', { title: 'Payments', scripts: scripts, styles: styles } );
 };
 ex.post_payments = ( req, res ) => {
-	store.getPayments( {
-			email: req.body.email
-		} )
+	store.getPayments( { email: req.body.email } )
 		.then( ( payments ) => {
 			res.send( payments );
 		} );
+};
+ex.post_make_payment = ( req, res ) => {
+	store.makePayment( { id: req.body.id } )
+		.then( () => {
+			res.sendStatus( 200 );
+		} );
+};
+ex.post_dispute_payment = ( req, res ) => {
+	store.disputePayment( { id: req.body.id } )
+		.then( () => {
+			res.sendStatus( 200 );
+		});
 };
 
 /**
@@ -42,7 +52,7 @@ ex.post_payments = ( req, res ) => {
 ex.get_pickup = ( req, res ) => {
 	let styles = [ { style: '/stylesheets/style.css' } ];
 	let scripts = [ { script: '/js/pickup.js' } ];
-	res.render( 'pickup', { title: 'Home', scripts: scripts, styles: styles } );
+	res.render( 'user/pickup', { title: 'Pickup', scripts: scripts, styles: styles } );
 };
 
 /**
@@ -51,7 +61,7 @@ ex.get_pickup = ( req, res ) => {
 ex.get_feedback = ( req, res ) => {
 	let styles = [ { style: '/stylesheets/style.css' } ];
 	let scripts = [ { script: '/js/feedback.js' } ];
-	res.render( 'feedback', { title: 'Home', scripts: scripts, styles: styles } );
+	res.render( 'user/feedback', { title: 'Feedback', scripts: scripts, styles: styles } );
 };
 ex.post_feedback = ( req, res ) => {
 	store.submitFeedback( {

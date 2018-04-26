@@ -9,15 +9,17 @@ let hbs = require( 'hbs' );
 
 let authRouter = require( './routes/auth' );
 let homepageRouter = require( './routes/site' );
+let adminRouter = require( './routes/admin' );
 
 let app = express();
 
 // register partials with handlebars
 hbs.registerPartial( 'validateModal', fs.readFileSync( __dirname + '/views/partials/validateModal.hbs', 'utf8' ));
+hbs.registerPartial( 'feedbackModal', fs.readFileSync( __dirname + '/views/partials/feedbackModal.hbs', 'utf8' ));
 hbs.registerPartials(__dirname + '/views/partials' );
 
 // view engine setup
-app.set( 'views', path.join( __dirname, 'views' ) );
+app.set( 'views', path.join( __dirname, '/views' ) );
 app.set( 'view engine', 'hbs' );
 
 app.use( logger( 'dev' ) );
@@ -28,6 +30,7 @@ app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 app.use( '/', authRouter );
 app.use( '/site', homepageRouter );
+app.use( '/admin', adminRouter );
 
 // catch 404 and forward to error handler
 app.use( function ( req, res, next ) {

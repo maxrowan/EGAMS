@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -17,5 +18,27 @@
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
     "requirejs": "^2.3.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2017": "^6.24.1",
+    "jest": "^22.4.3",
+    "superagent": "^3.8.2",
+    "supertest": "^3.0.0"
+  },
+  "jshintConfig": {
+    "undef": true,
+    "unused": true,
+    "esversion": 6,
+    "globals": {
+      "$": false,
+      "__dirname": false,
+      "exports": false,
+      "require": false,
+      "module": false,
+      "describe": false,
+      "test": false,
+      "expect": false
+    }
   }
 }

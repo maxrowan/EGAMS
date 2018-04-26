@@ -7,7 +7,6 @@ $( () => {
 		let email = $( '#modal_email').val();
 		let password = $( '#modal_password' ).val();
 
-
 		validate( email, password )
 			.then( (status) => {
 				console.log( status );
@@ -38,7 +37,7 @@ $( () => {
 		let email = $( '#form_email' ).val();
 		let address = $( '#form_address' ).val();
 
-		let url = 'http://localhost:3000';
+		let url = 'https://localhost:3000';
 		let endpoint = '/update';
 
 		let payload = { 'first_name': firstName, 'last_name': lastName, 'email': email, 'address': address };
@@ -48,6 +47,9 @@ $( () => {
 
 		setFormFields()
 	});
+
+	// TODO: add delete account feature
+	// TODO: add signout feature
 });
 
 function setFormFields() {

@@ -14,7 +14,6 @@ function signup( { email, password, first_name, last_name, address } ) {
 
 			// add to DB
 			let { salt, hash } = saltHashPassword( { password } );
-			console.log( `Add User with:\n\temail: ${email}\n\tpassword: ${hash}\n\tfirst name: ${first_name}\n\tlast name: ${last_name}\n\taddress: ${address}` );
 			return knex( 'users' ).insert( {
 					email: email,
 					salt: salt,
@@ -41,8 +40,6 @@ function updateUserInfo( { email, first_name, last_name, address } ) {
 }
 
 function authenticate( { email, password } ) {
-	// TODO: Validate input?
-	console.log( `Authenticating User:\n\tEmail: ${email}\n\tPassword: ${password}` );
 	return knex( 'users' ).where( { email } )
 		.then( ( [ users ] ) => {
 			if ( !users ) return { success: false };
@@ -51,7 +48,7 @@ function authenticate( { email, password } ) {
 				salt: users.salt
 			} );
 
-			let success = (hash === users.hashed_password);
+			let success = (hash === users.hashed_password && users.suspended === 0);
 
 			if ( success ) {
 				return {
@@ -74,7 +71,7 @@ function saltHashPassword( { password, salt = randomString() } ) {
 	return {
 		salt,
 		hash: hash.digest( 'hex' )
-	}
+	};
 }
 
 function randomString() {
@@ -82,13 +79,12 @@ function randomString() {
 }
 
 function getPayments( { email } ) {
-
 	return knex( 'users' ).where( { email: email } )
 		.then( ( [ user ] ) => {
 			let user_id = user.id;
 
 			return knex( 'payments' )
-				.select( 'payment_for', 'amount_due' )
+				.select( 'id', 'payment_for', 'amount_due', 'paid' )
 				.where( { user_id: user_id } )
 				.then( ( payments ) => {
 					return payments;
@@ -96,8 +92,15 @@ function getPayments( { email } ) {
 		} );
 }
 
+function makePayment( { id } ) {
+	return knex( 'payments' ).where( { id: id } ).update( { paid: true } );
+}
+
+function disputePayment( { id } ) {
+	return knex( 'payments' ).where( {id: id}).update( {disputed: true});
+}
+
 function submitFeedback( { email, subject, message } ) {
-	console.log( `Add Feedback with:\n\temail: ${email}\n\tSubject: ${subject}\n\tMessage: ${message}` );
 	return knex( 'feedback' ).insert( {
 		email: email,
 		subject: subject,
@@ -110,4 +113,6 @@ ex.authenticate = authenticate;
 ex.updateUserInfo = updateUserInfo;
 ex.saltHashPassword = saltHashPassword;
 ex.getPayments = getPayments;
+ex.makePayment = makePayment;
+ex.disputePayment = disputePayment;
 ex.submitFeedback = submitFeedback;

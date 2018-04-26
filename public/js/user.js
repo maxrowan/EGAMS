@@ -26,3 +26,12 @@ function getUserData() {
 	};
 }
 
+function set( key, data ) {
+	$.cookie( key, null );
+	$.cookie( key, data );
+}
+function get( key ) {
+	return $.cookie( key );
+}
+
+

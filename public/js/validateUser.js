@@ -1,4 +1,4 @@
-let url = 'http://localhost:3000';
+let url = 'https://localhost:3000';
 let endpoint = '/validate';
 
 function validate( email, password ) {
